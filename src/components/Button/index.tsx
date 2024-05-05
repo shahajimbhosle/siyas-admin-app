@@ -3,7 +3,7 @@ interface ButtonProps {
   [key: string]: any;
 }
 
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children }: ButtonProps): JSX.Element => {
   return <button>{children}</button>;
 };
 
