@@ -1,0 +1,41 @@
+{
+  "name": "siyas-admin-app",
+  "version": "0.0.1",
+  "description": "Kick start react project development.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahajimbhosle/siyas-admin-app.git"
+  },
+  "keywords": [
+    "siyas-admin-app",
+    "admin",
+    "app",
+    "react-app",
+    "ready-to-use-react-application"
+  ],
+  "author": "shahajimbhosle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shahajimbhosle/siyas-admin-app/issues"
+  },
+  "homepage": "https://github.com/shahajimbhosle/siyas-admin-app#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.1",
+    "react": "^18.3.1",
+    "rollup": "^4.17.2",
+    "rollup-plugin-dts": "^6.1.0",
+    "typescript": "^5.4.5"
+  }
+}
