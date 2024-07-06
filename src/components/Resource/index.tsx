@@ -1,9 +1,7 @@
-export interface ResourceProps {
-  path: string;
-}
+import { ResourceProps } from "../../types";
 
-const Resource: React.FunctionComponent<ResourceProps> = ({ path }) => {
-  return <p>RESOURCE - {path}</p>;
+const Resource: React.FunctionComponent<ResourceProps> = ({ name }) => {
+  return <p>RESOURCE - {name}</p>;
 };
 
 export default Resource;
