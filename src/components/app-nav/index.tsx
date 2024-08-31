@@ -1,14 +1,13 @@
 import { Nav, Sidebar, Sidenav } from "rsuite";
-import { MdDashboard } from "react-icons/md";
-import { FaPeopleGroup } from "react-icons/fa6";
-import { TbBuildingCommunity, TbReport, TbReportSearch } from "react-icons/tb";
 import { forwardRef, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useClickAway, useNavContext, useScreenSize } from "../../hooks";
-import "./styles.css";
 import { NavigationObjectType } from "../../types";
+import isEmpty from "lodash/isEmpty";
 
-const AppNavLink = forwardRef(({ to, children, ...rest }, ref) => {
+import "./styles.css";
+
+const AppNavLink = forwardRef(({ to, children, ...rest }: any, ref) => {
   return (
     <NavLink ref={ref} to={to} {...rest}>
       {children}
@@ -16,7 +15,7 @@ const AppNavLink = forwardRef(({ to, children, ...rest }, ref) => {
   );
 });
 
-const NavItem = ({ children, ...rest }) => {
+const NavItem = ({ children, onClick = () => {}, ...rest }: any) => {
   const { setExpanded } = useNavContext();
   const { isMobile } = useScreenSize();
 
@@ -24,15 +23,42 @@ const NavItem = ({ children, ...rest }) => {
     <Nav.Item
       as={AppNavLink}
       {...rest}
-      onClick={() => isMobile && setExpanded(false)}>
+      onClick={() => {
+        onClick();
+        isMobile && setExpanded(false);
+      }}>
       {children}
     </Nav.Item>
   );
 };
 
 type AppNavProps = {
-  navigation: NavigationObjectType;
+  navigation: Array<NavigationObjectType>;
 };
+
+const renderNav = (navigation: Array<NavigationObjectType>) =>
+  navigation.map(({ name, path, icon, onClick, children }) => {
+    if (!isEmpty(children)) {
+      return (
+        <Nav.Menu
+          icon={icon}
+          trigger="hover"
+          placement="rightStart"
+          title={
+            <span className="link-title multilevel-link-title">{name}</span>
+          }
+          key={`${name}-${path}`}>
+          {renderNav(children)}
+        </Nav.Menu>
+      );
+    }
+
+    return (
+      <NavItem icon={icon} to={path} onClick={onClick} key={`${name}-${path}`}>
+        <span className="link-title">{name}</span>
+      </NavItem>
+    );
+  });
 
 const AppNav: React.FunctionComponent<AppNavProps> = ({ navigation }) => {
   const { expanded, setExpanded } = useNavContext();
@@ -53,29 +79,7 @@ const AppNav: React.FunctionComponent<AppNavProps> = ({ navigation }) => {
       ref={navRef}>
       <Sidenav className="nav" expanded={expanded} appearance="subtle">
         <Sidenav.Body>
-          <Nav>
-            <NavItem icon={<MdDashboard />} to="/">
-              <span className="link-title">Dashboard</span>
-            </NavItem>
-            <NavItem icon={<FaPeopleGroup />} to="/clients">
-              <span className="link-title">Clients</span>
-            </NavItem>
-            <NavItem icon={<TbBuildingCommunity />} to="/properties">
-              <span className="link-title">Properties</span>
-            </NavItem>
-            <Nav.Menu
-              icon={<TbReport />}
-              trigger="hover"
-              placement="rightStart"
-              title={<span className="link-title">Reports</span>}>
-              <NavItem to="/all-reports">
-                <span className="link-title">All Reports</span>
-              </NavItem>
-              <NavItem icon={<TbReportSearch />} to="/report1">
-                <span className="link-title">Report 1</span>
-              </NavItem>
-            </Nav.Menu>
-          </Nav>
+          <Nav>{renderNav(navigation)}</Nav>
         </Sidenav.Body>
         <Sidenav.Toggle onToggle={toggleNav} />
       </Sidenav>

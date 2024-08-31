@@ -6,6 +6,7 @@ import { MdDarkMode } from "react-icons/md";
 import { useToggleTheme } from "../../hooks";
 import styled from "styled-components";
 import ComponentTooltip from "../common/Tooltip";
+import { Ref } from "react";
 
 const DropdownItem = styled(Dropdown.Item)`
   display: flex;
@@ -18,7 +19,7 @@ const ThemeSwitch = () => {
   const { theme, setLightTheme, setDarkTheme, setHighContrastTheme } =
     useToggleTheme();
 
-  const renderIconButton = (props, ref) => {
+  const renderIconButton = (props: any, ref: Ref<any>) => {
     return (
       <ComponentTooltip text="Change theme" placement="left">
         <IconButton
@@ -44,22 +45,19 @@ const ThemeSwitch = () => {
       <DropdownItem
         icon={<MdOutlineLightMode />}
         onClick={setLightTheme}
-        active={theme === "light"}
-      >
+        active={theme === "light"}>
         Light
       </DropdownItem>
       <DropdownItem
         icon={<MdDarkMode />}
         onClick={setDarkTheme}
-        active={theme === "dark"}
-      >
+        active={theme === "dark"}>
         Dark
       </DropdownItem>
       <DropdownItem
         icon={<ImBrightnessContrast />}
         onClick={setHighContrastTheme}
-        active={theme === "high-contrast"}
-      >
+        active={theme === "high-contrast"}>
         High Contrast
       </DropdownItem>
     </Dropdown>

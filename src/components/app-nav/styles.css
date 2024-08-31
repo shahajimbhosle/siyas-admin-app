@@ -43,6 +43,16 @@
   height: 24px;
 }
 
+.nav .rs-sidenav-item span.multilevel-link-title,
+.nav .rs-dropdown-item span.multilevel-link-title,
+.nav .rs-dropdown-item span.link-title {
+  margin-left: -6px;
+}
+
+.nav .rs-dropdown-item-with-icon {
+  display: flex !important;
+}
+
 /* Closed nav styles */
 
 .nav.rs-sidenav-collapse-out .rs-sidenav-item span.link-title {

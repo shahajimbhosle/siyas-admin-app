@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { IoMenu } from "react-icons/io5";
-import Logo from "../common/Logo";
 import { useNavContext } from "../../hooks";
 import ThemeSwitch from "./ThemeSwitch";
+import { ReactElement, SyntheticEvent } from "react";
 
 const HeaderContainer = styled.div`
   height: 50px;
@@ -19,12 +19,16 @@ const LogoContainer = styled.div`
   flex-grow: 1;
 `;
 
-const AppBar = () => {
+type AppBarProps = {
+  logo?: ReactElement | string;
+};
+
+const AppBar = ({ logo }: AppBarProps) => {
   const { setExpanded } = useNavContext();
 
-  const handleClickToggle = (e) => {
+  const handleClickToggle = (e: SyntheticEvent) => {
     e.stopPropagation();
-    setExpanded((pre) => !pre);
+    setExpanded((pre: boolean | undefined) => !pre);
   };
 
   return (
@@ -36,7 +40,7 @@ const AppBar = () => {
         className="mobile-nav-toggle"
       />
       <LogoContainer>
-        <Logo />
+        {logo && typeof logo === "string" ? <img src={logo} /> : logo}
       </LogoContainer>
       <ThemeSwitch />
     </HeaderContainer>

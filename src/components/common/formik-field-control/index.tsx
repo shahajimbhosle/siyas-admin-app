@@ -1,9 +1,17 @@
-import { Field, getIn } from "formik";
+import { Field, FieldProps, getIn } from "formik";
 import { FormFieldError } from "../styled-components";
 import FormGroup from "rsuite/esm/FormGroup";
 import FormControlLabel from "rsuite/esm/FormControlLabel";
 import FormHelpText from "rsuite/esm/FormHelpText";
 import FormControl from "rsuite/esm/FormControl";
+
+interface FormikControlProps extends FieldProps {
+  onChange?: Function;
+  onBlur?: Function;
+  label?: string;
+  helpText?: string;
+  [key: string]: any;
+}
 
 const FormikControl = ({
   field, // { name, value, onChange, onBlur }
@@ -13,7 +21,7 @@ const FormikControl = ({
   label,
   helpText,
   ...rest
-}) => {
+}: FormikControlProps) => {
   const {
     onChange: formikOnChange,
     onBlur: formikOnBlur,
@@ -21,13 +29,13 @@ const FormikControl = ({
     ...restFields
   } = field;
 
-  const customOnChange = (e) => {
+  const customOnChange = (e: any) => {
     setFieldValue(name, e);
     formikOnChange(e);
     onChange(e);
   };
 
-  const customOnBlur = (e) => {
+  const customOnBlur = (e: any) => {
     formikOnBlur(e);
     onBlur(e);
   };
@@ -52,7 +60,15 @@ const FormikControl = ({
   );
 };
 
-const FormikFieldControl = (props) => {
+type FormikFieldControlProps = {
+  onChange?: Function;
+  onBlur?: Function;
+  label?: string;
+  helpText?: string;
+  [key: string]: any;
+};
+
+const FormikFieldControl = (props: FormikFieldControlProps) => {
   return <Field component={FormikControl} {...props} />;
 };
 

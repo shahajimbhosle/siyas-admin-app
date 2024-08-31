@@ -1,7 +1,7 @@
 import { Panel, Stack, Divider } from "rsuite";
 import styled from "styled-components";
 import LoginForm from "./LoginForm";
-import Logo from "../Logo";
+import { ReactElement } from "react";
 
 const LoginContainer = styled(Stack)`
   height: 100vh;
@@ -13,18 +13,18 @@ const StyledPanel = styled(Panel)`
 `;
 
 interface LoginProps {
-  logoPath?: string | undefined;
+  logo?: ReactElement | string;
 }
 
-const Login = ({ logoPath }: LoginProps) => {
+const Login = ({ logo }: LoginProps) => {
   return (
     <LoginContainer
       justifyContent="center"
       alignItems="center"
       direction="column">
-      <Logo logoPath={logoPath} />
+      {logo && typeof logo === "string" ? <img src={logo} /> : logo}
       <StyledPanel bordered>
-        <h3 className="text-center">Sign In</h3>
+        <h5 className="text-center">Sign In</h5>
         <Divider />
         <LoginForm />
       </StyledPanel>

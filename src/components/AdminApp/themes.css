@@ -1,0 +1,11 @@
+:root {
+  --nav-bg-color: #ffffff;
+}
+
+.rs-theme-dark {
+  --nav-bg-color: #202429;
+}
+
+.rs-theme-high-contrast {
+  --nav-bg-color: #202429;
+}

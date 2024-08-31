@@ -1,16 +1,23 @@
-import { Tooltip, Whisper } from "rsuite";
+import { Tooltip, Whisper, WhisperProps } from "rsuite";
+
+type ComponentTooltipProps = WhisperProps & {
+  text?: string;
+  children: any;
+};
 
 const ComponentTooltip = ({
   trigger = "hover",
   placement = "auto",
   text = "Tooltip text.",
   children,
-}) => (
+  speaker,
+  ...rest
+}: ComponentTooltipProps) => (
   <Whisper
     trigger={trigger}
     placement={placement}
-    speaker={<Tooltip>{text}</Tooltip>}
-  >
+    speaker={speaker ?? <Tooltip>{text}</Tooltip>}
+    {...rest}>
     {children}
   </Whisper>
 );

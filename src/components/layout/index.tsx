@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Container, Content } from "rsuite";
-// import AppNav from "../app-nav";
-// import AppBar from "../app-bar";
+import AppNav from "../app-nav";
+import AppBar from "../app-bar";
 import AppBody from "../app-body";
 import styled from "styled-components";
 import { useNavContext, useScreenSize } from "../../hooks";
@@ -28,12 +28,14 @@ const ContentContainer = styled.div`
 
 interface LayoutProps {
   children: any;
-  navigation: NavigationObjectType;
+  navigation: Array<NavigationObjectType>;
+  logo?: ReactElement | string;
 }
 
 const Layout: React.FunctionComponent<LayoutProps> = ({
   children,
-  navigation,
+  navigation = [],
+  logo,
 }) => {
   const { expanded, setExpanded } = useNavContext();
   const { isMobile } = useScreenSize();
@@ -48,9 +50,9 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
 
   return (
     <Container>
-      {/* <AppBar /> */}
+      <AppBar logo={logo} />
       <Container>
-        {/* <AppNav navigation={navigation} /> */}
+        <AppNav navigation={navigation} />
         <ContentContainer>
           <Swipeable
             onSwipeRight={handleSwipeRight}
