@@ -1,4 +1,4 @@
-# IMPORTANT - This project is under development. It will be available to use after August 1st, 2024 IST.
+# IMPORTANT - DO NOT USE IT. This project is under development phase.
 
 # siyas-admin-app
 

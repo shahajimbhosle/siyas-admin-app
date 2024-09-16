@@ -1,6 +1,6 @@
 {
   "name": "siyas-admin-app",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Kick start react project development.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

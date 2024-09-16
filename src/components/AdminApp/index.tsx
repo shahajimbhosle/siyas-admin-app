@@ -17,10 +17,7 @@ interface AdminAppProps {
 }
 
 /**
- * This is root element
- *
- * @param children ReactElement | ReactElement[]
- * @returns ReactElement
+ * @description This is root element
  */
 const AdminApp: React.FunctionComponent<AdminAppProps> = ({
   children,

@@ -7,6 +7,10 @@ const LoginContainer = styled(Stack)`
   height: 100vh;
 `;
 
+const LogoContainer = styled.div`
+  margin-bottom: 10px;
+`;
+
 const StyledPanel = styled(Panel)`
   background-color: #ffffff;
   width: 400px;
@@ -22,7 +26,9 @@ const Login = ({ logo }: LoginProps) => {
       justifyContent="center"
       alignItems="center"
       direction="column">
-      {logo && typeof logo === "string" ? <img src={logo} /> : logo}
+      <LogoContainer>
+        {logo && typeof logo === "string" ? <img src={logo} /> : logo}
+      </LogoContainer>
       <StyledPanel bordered>
         <h5 className="text-center">Sign In</h5>
         <Divider />
