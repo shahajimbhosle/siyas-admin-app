@@ -6,6 +6,10 @@ import postcss from "rollup-plugin-postcss";
 import packageJson from "./package.json" assert { type: "json" };
 import babel from "@rollup/plugin-babel";
 import url from "@rollup/plugin-url";
+import terser from "@rollup/plugin-terser";
+import { visualizer } from "rollup-plugin-visualizer";
+
+const dev = process.env.NODE_ENV !== "production";
 
 export default [
   {
@@ -26,7 +30,26 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ["react", "react-dom"], // Mark react and react-dom as external
+    external: [
+      "react",
+      "react-dom",
+      "@tanstack/react-query",
+      "@types/react",
+      "formik",
+      "localforage",
+      "lodash",
+      "moment",
+      "react",
+      "react-dom",
+      "react-icons",
+      "react-router",
+      "react-router-dom",
+      "rsuite",
+      "styled-components",
+      "tslib",
+      "typescript",
+      "yup",
+    ], // Mark react and react-dom as external
     plugins: [
       resolve(),
       commonjs(),
@@ -49,6 +72,17 @@ export default [
         // Directory to emit files to
         fileName: "[name][extname]",
       }),
+      terser({
+        ecma: 2015,
+        mangle: { toplevel: true },
+        compress: {
+          toplevel: true,
+          drop_console: !dev,
+          drop_debugger: !dev,
+        },
+        output: { quote_style: 1 },
+      }),
+      visualizer(),
     ],
   },
   {
